@@ -1,4 +1,5 @@
 # Runs on normal Linux distros with Bash, and WSL 2 distros from within their terminal. Do not run on Docker for Windows.
+# This does work on WSL 2, but due to permission issues, it will fail when in /mnt/c, so go to your Linux user home first.
 #!/bin/bash
 set +x
 
