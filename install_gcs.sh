@@ -8,7 +8,6 @@
 ###
 ### Created by Hubok, submit issues below:
 ### github-maint@hubok.net
-### PGP Key: https://pki.hubok.net/pgp/0x3385975094A27D67.asc
 
 
 if [[ $EUID > 0 ]]; then
