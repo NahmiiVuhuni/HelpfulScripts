@@ -68,7 +68,7 @@ ar x gcs.deb
 tar -xf data.tar.xz
 
 cp -r opt /
-echo -e "[Desktop Entry]\nName=GURPS Character Sheet\nExec=/opt/gcs/bin/GCS\nIcon=/opt/gcs/lib/GCS.png\nType=Application\nCategories=Game\nVersion=$1" > /usr/share/applications/gcs.desktop
+echo -e "[Desktop Entry]\nName=GURPS Character Sheet\nExec=env _JAVA_OPTIONS= /opt/gcs/bin/GCS\nIcon=/opt/gcs/lib/GCS.png\nType=Application\nCategories=Game\nVersion=$1" > /usr/share/applications/gcs.desktop
 
 cleanup_on_exit
 exit
