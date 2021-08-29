@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+if [[ -z $1 ]]; then
+	echo "Please specify a drive to check."
+	exit 1
+fi
+
+RAWOUT=$(sudo smartctl -a $1)
+
+OUT005=$(echo "$RAWOUT" | grep '  5 Reallocated_Sector_Ct ')
+OUT197=$(echo "$RAWOUT" | grep '197 Current_Pending_Sector')
+OUT198=$(echo "$RAWOUT" | grep '198 Offline_Uncorrectable ')
+
+if [[ -z $OUT005 || -z $OUT197 || -z $OUT198 ]]; then
+	echo -e "Error: could not retrive SMART data for values 005, 197, or 198.\nPlease check smartctl -a $1 for more information.\nIf this is an NVMe drive, this tool will not work."
+	exit 2
+fi
+
+SUB_L1=0
+SUB_L2=28
+SUB_R1=87
+SUB_R2=100
+
+echo "${OUT005:$SUB_L1:$SUB_L2}${OUT005:$SUB_R1:$SUB_R2}"
+echo "${OUT197:$SUB_L1:$SUB_L2}${OUT197:$SUB_R1:$SUB_R2}"
+echo "${OUT198:$SUB_L1:$SUB_L2}${OUT198:$SUB_R1:$SUB_R2}"
